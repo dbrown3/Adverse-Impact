@@ -1,0 +1,139 @@
+{% extends "backendBase.html" %}
+{% block mainContent %}
+
+<meta charset="UTF-8">
+<title>Adverse Impact</title>
+
+<body>
+<div id="maincontent" class="page-container scrollable" role="main">
+    <script>
+        function click_export() {
+            window.location = "/adverseimpact/adverse_impact_export";
+        }
+
+    </script>
+
+
+
+    <div class="single-column">
+
+        <div class="card"  style="height: 66px">
+            <a href="{% url 'adverseimpact:index' %}"><h1 title="Reload page ... New foundations of Adverse Impact.">Adverse Impact</h1></a>
+        </div>
+       <div><br>This version of the Adverse Impact program <div id="version" class="card" style="height: 13px"><i>{{version_now}}</i></div><br>
+        Accepts xml files from profile creation. <br>
+        Exports docx Adverse Impact Report of RR and Above.<br></div>
+
+
+        <div class="card" id="authors"  style="height: 99px">
+            <h7>By<br>
+                <a href="mailto:Derek.Brown@infor.com"><i>Derek Brown, MS</i></a><br>
+                &<br>
+                <a href="https://scholar.google.com/citations?user=c0lTOcgAAAAJ&hl=en"><i>Phillip L. Gilmore, PhD</i></a></h7>
+        </div>
+
+        <div class="card"  style="height:555px">
+            <p>
+                The adverse impact tool is designed to efficiently evaluate and report selection procedures.<br>
+                To get started, let's input the <strong>xml file</strong></strong> that contains our data.<br>
+                <br>
+
+            </p>
+
+            <div style="align:center" style="height: 100px">
+                <form name="local_form_canstyle" id="local_form_canstyle" action="{% url 'adverseimpact:adverse_impact_export_report' %}" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+
+                    <input type="hidden" value="{{ master_data }}" name="master_data"/>
+                    <input type="hidden" value="{{ col_headers }}" name="col_headers"/>
+                    <input type="hidden" value="{{ in_name }}" name="in_name"/>
+                    <input type="hidden" value="{{ k }}" name="k"/>
+                    <input type="hidden" value="{{ start_time }}" name="start_time"/>
+
+                    <p align="center"> Choose XML File: </p>
+                    <a>  {{ data_entry_form.xml_file }} </a>
+                    <br>
+
+                    With our variables input into the program we can begin<br>
+                    to add information required for the report.<br>
+                    <i>Add the name of the profile.</i><br>
+
+                    <div class="field">
+                    <br>Profile name:<br><input type="text" placeholder="Company 1 Jan17 - Profile 1.00" id="profile_name" name="profile_name"><br>
+
+                    <br>Next add the time frame this report covers.<br>
+                    <br>Start Date:<br><input type="date" id="start_date" name="start_date"><br>
+                    <br>End Date:<br><input type="date" id="end_date" name="end_date"><br>
+
+                    </div>
+
+                    <br>
+
+
+                    <br>We have all the information we need to produce the report.<br>
+                    If you are ready to proceed, press the button below.<br>
+                    <input type="submit" name="upload" value="Upload Data" style="width: inherit">
+
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+<br><br><br><br><br><br><br><br>
+</body>
+
+<style>
+
+
+    h1 {
+        text-align: center;
+        color: #1A1A1A;
+    }
+
+    #authors {
+        text-align: center;
+        color: #737373;
+        font-size: 100%;
+    }
+
+    p {
+        font-size: 100%;
+        text-align: center;
+    }
+
+    #a {
+        text-align: center;
+    }
+
+    div{
+
+        text-align: center;
+    }
+
+    #version {
+        color: #1A1A1A;
+    }
+
+    #file_upload {
+        text-align: center;
+    }
+
+    #local_form_canstyle {
+        padding: 0% 43%;
+    }
+
+    .button {
+        background-color:blue;
+        border:none;
+        color:white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+    }
+
+</style>
+
+{% endblock %}

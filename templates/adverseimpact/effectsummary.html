@@ -1,0 +1,66 @@
+{% extends "backendBase.html" %}
+{% block mainContent %}
+{%  load static %}
+
+<!DOCTYPE html>
+<meta charset="utf-8">
+
+<style>
+
+    h1,h2,h3 {
+        text-align: center;
+        color: #69B5DD;
+    }
+
+    p {
+        font-size: 100%;
+        text-align: center;
+        padding: 2%;
+    }
+
+    ul {
+        font-size: 100%;
+        text-align: center;
+    }
+
+    #authors {
+        text-align: center;
+        color: #737373;
+        font-size: 100%;
+    }
+
+    #TotalSample {
+        text-align:center;
+        color: #737374;
+        font-size: 120%
+    }
+
+</style>
+
+<div id="maincontent" class="page-container scrollable" role="main">
+    <div class="single-column">
+        {% csrf_token %}
+        <div class="card"  style="text-align:center; padding: 5% 0%;">
+            <a href="{% url 'twister:user_start' %}"><img id="twister_pic" title="Back to user start screen" style="border-radius:1px;height:60px; width:60px;" src="{% static 'twister/images/twister.png' %}"/></a>
+        </div>
+        <div class="card">
+            <h1>Twister</h1>
+        </div>
+        <div id="TotalSample" class="card">
+            {{TotalSample}}
+        </div>
+        <div id="TotalSample" class="card">
+            <br>{{UserTime_hours}} hours, {{UserTime_minutes}} minutes, and {{UserTime_seconds}} seconds saved in your life.<br>
+            <br>Bless the Gods.<br>
+        </div>
+        <div id="TotalSample" class="card">
+            </p>{{TotalRuns}} as of ... {{AsOf}}<br>
+        </div>
+    </div>
+
+</div>
+
+</html>
+
+
+{% endblock %}

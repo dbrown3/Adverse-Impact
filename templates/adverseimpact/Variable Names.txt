@@ -1,0 +1,163 @@
+TITLE PAGE
+
+{{company_name}}
+{{profile_title}}
+{{date_generated}}
+
+DATA COLLECTION
+
+{{sample_size}}
+{{start_date}} - Start date of the time frame used for the report
+{{end_date}} - End date of the time frame used for the report
+{%p if did_not_disclose %} - Displays the percentage of the sample that didn't disclose either gender, ethinity, or date of birth in 'Data Collection'
+{{ratio_did_not_disclose}} - The percentage of the sample that didn't disclose ...
+{{sample_did_not_disclose}} - Sample size that didn't disclose ...
+{%p if not_sufficient %} - Samples were insufficient for analysis in 'Data Collection'
+
+ETHNICITY ADVERSE IMPACT ANALYSIS
+
+{%p if any_E_significant %} - If there are detailed summary of each ethnicity group or none at all
+#{%p if Hispanic_details %} -
+{{RR_H_AIR}} - 
+#{%p if Black_details %} - Summary statement for Black group
+{{RR_B_AIR}} - Adverse impact ratio for Black group
+
+- - - - -
+{{Ethnicity_adverse_impact_result}} - Whether there was adverse impact or not
+{{ethnicity_result}} - Summary statement for ethnicity groups
+
+TABLE 1
+
+{{reported_ethnicity}} - Sample size that reported their ethnicity
+{{Hispanic_sample}} - 
+{{Black_sample}} - 
+{{Native_Hawaiian_or_Other_Pacific_Islander_sample}} -
+{{Asian_sample}} - 
+{{American_Indian_or_Alaska_Native_sample}} -
+{{Two_or_More_Ethnicities_sample}} -
+{{Caucasian_sample}} - 
+{{RR_H_sample}} - 
+{{RR_B_sample}} - 
+{{RR_NH_sample}} - 
+{{RR_ASN_sample}} - 
+{{RR_AMI_sample}} - 
+{{RR_Two_sample}} - 
+{{RR_C_sample}} - 
+{{RR_H_SR}} - 
+{{RR_B_SR}} - 
+{{RR_NH_SR}} - 
+{{RR_ASN_SR}} - 
+{{RR_AMI_SR}} - 
+{{RR_Two_SR}} - 
+{{RR_C_SR}} - 
+{{RR_H_AIR}} - repeat
+{{RR_B_AIR}} - ...
+{{RR_NH_AIR}} - ...
+{{RR_ASN_AIR}} - ...
+{{RR_AMI_AIR}} - ...
+{{RR_Two_AIR}} - ...
+{%p if disclosed_ethnicity %}
+{{ethnicity_did_not_disclose}}
+{{ratio_ethnicity_did_not_disclose}}
+
+GENDER ADVERSE IMPACT ANALYSIS
+
+{%p if any_G_significant %} - 
+{{RR_W_AIR}} - 
+{{gender_adverse_impact_result}} -
+{{gender_result}} - Summary statement for gender groups
+
+TABLE 2
+
+{{reported_gender}} - Sample size that reported their gender
+{{women_sample}} - 
+{{men_sample}} - 
+{{RR_W_sample}} - 
+{{RR_M_sample}} - 
+{{RR_W_SR}} - 
+{{RR_M_SR}} - 
+{{RR_W_AIR}} - repeat
+{%p if disclosed_gender %}
+{{gender_did_not_disclose}}
+{{ratio_gender_did_not_disclose}}
+
+AGE ADVERSE IMPACT ANALYSIS 
+
+{%p if any_A_significant %} -
+{{RR_O_AIR}} - 
+{{age_adverse_impact_result}} -
+{{age_result}} - Summary statement for gender groups
+
+TABLE 3
+
+{{reported_age}} - Sample size that reported their age
+{{over_sample}} - 
+{{under_sample}} - 
+{{RR_O_sample}} - 
+{{RR_U_sample}} - 
+{{RR_O_SR}} - 
+{{RR_U_SR}} - 
+{{RR_O_AIR}} - repeat
+{%p if disclosed_age %}
+{{age_did_not_disclose}}
+{{ratio_age_did_not_disclose}}
+
+ADVERSE IMPACT ANALYSIS CONCLUSIONS
+
+{{ethincity_conclusion}} - 
+{{gender_conclusion}} - 
+{{age_conclusion}} - 
+{%p if any_low_rates %} - Additional information if any ratio was uninterpretable
+
+
+**Have to add in a clause that differentiates whether there were multiple ethnic groups that were reported on so we can structure the commas.
+**Have to add in conditional statements under each Table: *Findings are presented for report completion purposes only. When sample size is not sufficient.
+**OnlyIncludeCandidateswithDemographics is user input in admin
+
+<br><button class="btn" id="export_button" onclick="click_export()" type="button" style="color:white;background-color:#69B5DD" title="Yayayayayaya...">Generate</button><br>
+
+                    profile_dict = dict()
+                    context['Insert1'] = profiles_data.get('Insert1')
+                    profile_dict['DateGenerated'] = current_time.strftime('%B %d, %Y')
+                    profile_dict['SampleSize'] = int(profiles_data.get('SampleSize').replace(',', ''))
+                    profile_dict['fromDate'] = profiles_data.get('fromDate')
+                    profile_dict['toDate'] = profiles_data.get('toDate')
+                    profile_dict['OnlyIncludeCandidatesWithAllDemographics'] = profiles_data.get('OnlyIncludeCandidatesWithAllDemographics')
+                    profile_dict['DidNotReportAllDemoPercent'] = profiles_data.get('DidNotReportAllDemoPercent')
+                    profile_dict['DidNotReportAllDemo'] = profiles_data.get('DidNotReportAllDemo')
+                    profile_dict['RemoveT1Paragraph'] = profiles_data.get('RemoveT1Paragraph')
+                    profile_dict['Ref29a'] = profiles_data.get('Ref29a')
+                    profile_dict['EthnicityResponse'] = int(profiles_data.get('EthnicityResponse').replace(',', ''))
+                    profile_dict['hasHispanic'] = profiles_data.get('hasHispanic')
+                    profile_dict['Ref2'] = float(profiles_data.get(''))
+
+                    profile_dict['minimum_performance_score'] = float(profiles_data.get('MinimumPerformance'))
+                    profile_dict['maximum_performance_score'] = float(profiles_data.get('MaximumPerformance'))
+                    profile_dict['r_coefficient'] = float(profiles_data.get('r'))
+                    profile_dict['p_value'] = float(profiles_data.get('p'))
+                    profile_dict['num_training'] = int(profiles_data.get('n').replace(',', ''))
+                    profile_dict['num_HPs'] = int(profiles_data.get('nHPs').replace(',', ''))
+                    profile_dict['num_LPs'] = int(profiles_data.get('nLPs').replace(',', ''))
+                    profile_dict['mean_fit_HPs'] = float(profiles_data.get('HPsMean'))
+                    profile_dict['mean_fit_LPs'] = float(profiles_data.get('LPsMean'))
+                    profile_dict['d_HPs_LPs'] = float(profiles_data.get('dHPsLPs'))
+                    profile_dict['p_HPs_LPs'] = float(profiles_data.get('pHPsLPs'))
+                    profile_dict['num_NR'] = int(profiles_data.get('nNR').replace(',', ''))
+                    profile_dict['num_RR'] = int(profiles_data.get('nRR').replace(',', ''))
+                    profile_dict['num_RQ'] = int(profiles_data.get('nRQ').replace(',', ''))
+                    profile_dict['num_REC'] = int(profiles_data.get('nREC').replace(',', ''))
+                    profile_dict['mean_performance_NR'] = float(profiles_data.get('MeanNR'))
+                    profile_dict['mean_performance_RR'] = float(profiles_data.get('MeanRR'))
+                    profile_dict['mean_performance_RQ'] = float(profiles_data.get('MeanRQ'))
+                    profile_dict['mean_performance_REC'] = float(profiles_data.get('MeanREC'))
+                    if str(profiles_data.get('IncludeGPS')) == 'Yes':
+                        profile_dict['gps_NR'] = int(profiles_data.get('gpsNR').replace(',', ''))
+                        profile_dict['gps_RR'] = int(profiles_data.get('gpsRR').replace(',', ''))
+                        profile_dict['gps_RQ'] = int(profiles_data.get('gpsRQ').replace(',', ''))
+                        profile_dict['gps_REC'] = int(profiles_data.get('gpsREC').replace(',', ''))
+                    # save the data
+                    profiles_list.append(profile_dict)
+    doc.render(context)
+    doc.save(response)
+
+    return response
